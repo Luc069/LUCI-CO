@@ -1,3 +1,5 @@
+import { PhoneCall } from "lucide-react";
+
 import { ContactModalButton } from "@/components/sections/contact/contact-modal";
 import { Marquee } from "@/components/ui/marquee";
 import { cn } from "@/lib/utils";
@@ -181,7 +183,8 @@ export function FinalCtaSection() {
             size="lg"
             className="font-sans text-sm font-medium [--speed:5s]"
           >
-            Kontaktiraj nas
+            <PhoneCall className="size-4" aria-hidden="true" />
+            Rezervirajte pogovor
           </ContactModalButton>
         </div>
       </div>

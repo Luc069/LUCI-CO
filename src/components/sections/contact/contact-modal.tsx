@@ -13,7 +13,6 @@ import { Send } from "lucide-react";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
@@ -137,7 +136,8 @@ function ContactForm() {
 
       setStatus({
         type: "success",
-        message: "Prejeto. Oglasimo se ti z naslednjim korakom.",
+        message:
+          "Sporočilo je poslano.\nKmalu se vam oglasimo, da uskladimo termin za brezplačen pogovor.",
       });
     } catch {
       setStatus({
@@ -219,7 +219,7 @@ function ContactForm() {
       </div>
 
       {status ? (
-        <p className="mt-5 font-sans text-sm font-medium leading-[1.45] text-black/48">
+        <p className="mt-5 whitespace-pre-line font-sans text-sm font-medium leading-[1.45] text-black/48">
           {status.type === "error" &&
           status.message.includes("contact@luciand.co") ? (
             <>
@@ -264,12 +264,7 @@ export function ContactModalProvider({ children }: { children: ReactNode }) {
         <DialogContent>
           <div className="p-5 sm:p-6">
             <DialogHeader className="pr-8">
-              <DialogTitle>Kontaktiraj nas</DialogTitle>
-              <DialogDescription>
-                Na kratko povejte, kaj imate v mislih. Ideja, problem, proces
-                ali samo občutek, da nekaj v podjetju ne teče tako, kot bi
-                moralo.
-              </DialogDescription>
+              <DialogTitle>Rezervirajte brezplačen pogovor</DialogTitle>
             </DialogHeader>
             <ContactForm />
           </div>

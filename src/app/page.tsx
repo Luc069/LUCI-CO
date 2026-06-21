@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { PhoneCall } from "lucide-react";
 
 import {
   ContactModalButton,
@@ -118,7 +119,8 @@ export default function Home() {
                               size="lg"
                               className="font-sans text-sm font-medium [--speed:5s]"
                             >
-                              Kontaktiraj nas
+                              <PhoneCall className="size-4" aria-hidden="true" />
+                              Rezervirajte pogovor
                             </ContactModalButton>
                             <RainbowButton
                               asChild
@@ -127,7 +129,7 @@ export default function Home() {
                               className="font-sans text-sm font-medium [--speed:5s]"
                             >
                               <SmoothScrollLink href="#kako-delamo">
-                                Poglej, kako delamo
+                                Poglejte, kako delamo
                               </SmoothScrollLink>
                             </RainbowButton>
                           </div>
