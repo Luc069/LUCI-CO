@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 
 import { AnimatedBeam } from "@/components/ui/animated-beam";
+import type { Locale } from "@/lib/locale";
 import { cn } from "@/lib/utils";
 
 type BeamNodeProps = {
@@ -45,7 +46,34 @@ function BeamNode({
 
 const nodeIconClassName = "size-4 stroke-[2] sm:size-[18px]";
 
-function DesktopBeamStage() {
+const beamVisualCopy = {
+  si: {
+    business: "Podjetje",
+    idea: "Ideja",
+    process: "Proces",
+    problem: "Čas",
+    system: "Sistem",
+  },
+  en: {
+    business: "Business",
+    idea: "Idea",
+    process: "Process",
+    problem: "Time",
+    system: "System",
+  },
+} satisfies Record<
+  Locale,
+  {
+    business: string;
+    idea: string;
+    process: string;
+    problem: string;
+    system: string;
+  }
+>;
+
+function DesktopBeamStage({ locale }: { locale: Locale }) {
+  const copy = beamVisualCopy[locale];
   const containerRef = useRef<HTMLDivElement>(null);
   const businessRef = useRef<HTMLDivElement>(null);
   const processRef = useRef<HTMLDivElement>(null);
@@ -75,28 +103,28 @@ function DesktopBeamStage() {
         className="left-[5%] top-[11%]"
         icon={<BriefcaseBusiness className={nodeIconClassName} />}
       >
-        Business
+        {copy.business}
       </BeamNode>
       <BeamNode
         ref={processRef}
         className="left-[5%] top-[34%]"
         icon={<Workflow className={nodeIconClassName} />}
       >
-        Procesi
+        {copy.process}
       </BeamNode>
       <BeamNode
         ref={problemRef}
         className="left-[5%] top-[57%]"
         icon={<TriangleAlert className={nodeIconClassName} />}
       >
-        Problem
+        {copy.problem}
       </BeamNode>
       <BeamNode
         ref={ideaRef}
         className="left-[5%] top-[80%]"
         icon={<Lightbulb className={nodeIconClassName} />}
       >
-        Ideja
+        {copy.idea}
       </BeamNode>
 
       <BeamNode
@@ -117,7 +145,7 @@ function DesktopBeamStage() {
         className="right-[5%] top-1/2 h-16 min-w-32 -translate-y-1/2 border-[#cfd7e3] bg-white text-black"
         icon={<Cpu className={nodeIconClassName} />}
       >
-        AI sistem
+        {copy.system}
       </BeamNode>
 
       <AnimatedBeam fromRef={businessRef} curvature={80} delay={0} {...inputBeamProps} />
@@ -141,7 +169,8 @@ function DesktopBeamStage() {
   );
 }
 
-function MobileBeamStage() {
+function MobileBeamStage({ locale }: { locale: Locale }) {
+  const copy = beamVisualCopy[locale];
   const businessRef = useRef<HTMLDivElement>(null);
   const processRef = useRef<HTMLDivElement>(null);
   const problemRef = useRef<HTMLDivElement>(null);
@@ -195,28 +224,28 @@ function MobileBeamStage() {
         className="left-[4%] top-[7%] h-11 w-[42%] min-w-0 px-2 text-xs"
         icon={<BriefcaseBusiness className={nodeIconClassName} />}
       >
-        Business
+        {copy.business}
       </BeamNode>
       <BeamNode
         ref={processRef}
         className="right-[4%] top-[7%] h-11 w-[42%] min-w-0 px-2 text-xs"
         icon={<Workflow className={nodeIconClassName} />}
       >
-        Procesi
+        {copy.process}
       </BeamNode>
       <BeamNode
         ref={problemRef}
         className="left-[4%] top-[27%] h-11 w-[42%] min-w-0 px-2 text-xs"
         icon={<TriangleAlert className={nodeIconClassName} />}
       >
-        Problem
+        {copy.problem}
       </BeamNode>
       <BeamNode
         ref={ideaRef}
         className="right-[4%] top-[27%] h-11 w-[42%] min-w-0 px-2 text-xs"
         icon={<Lightbulb className={nodeIconClassName} />}
       >
-        Ideja
+        {copy.idea}
       </BeamNode>
 
       <BeamNode
@@ -237,17 +266,17 @@ function MobileBeamStage() {
         className="left-1/2 top-[83%] h-12 w-32 min-w-0 -translate-x-1/2 -translate-y-1/2 border-[#cfd7e3] bg-white px-3 text-xs text-black"
         icon={<Cpu className={nodeIconClassName} />}
       >
-        AI sistem
+        {copy.system}
       </BeamNode>
     </div>
   );
 }
 
-export function AiBeamVisual() {
+export function AiBeamVisual({ locale = "si" }: { locale?: Locale }) {
   return (
     <div className="relative w-full min-w-0 max-w-full overflow-hidden">
-      <MobileBeamStage />
-      <DesktopBeamStage />
+      <MobileBeamStage locale={locale} />
+      <DesktopBeamStage locale={locale} />
     </div>
   );
 }

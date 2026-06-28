@@ -86,7 +86,8 @@ The UI should feel premium, restrained, confident, and consistent. Avoid generic
 - `src/components/sections/process/process-intro-section.tsx` owns the second landing section: a 50/50 editorial text and right-side AI flow visual. The right visual uses the official Magic UI `AnimatedBeam` component in `src/components/ui/animated-beam.tsx` through `src/components/sections/process/ai-beam-visual.tsx`; keep it premium, minimal, and free of fake dashboard/customer data.
 - Contact CTAs open the shared modal in `src/components/sections/contact/contact-modal.tsx`; do not add a permanent contact section unless the page strategy changes.
 - `src/components/sections/footer/site-footer.tsx` owns the footer. Reuse `src/components/ui/marquee.tsx` for any footer marquee strip, keep the same `max-w-7xl` plus `border-x border-[#e6ebf1]` rhythm, and avoid client/logo claims in footer marquee content.
-- SEO uses native Next.js metadata, `src/app/sitemap.ts`, `src/app/robots.ts`, and homepage JSON-LD. The OG/social image is `public/og/luciand-og.png`; favicon files are already integrated and should not be changed unless explicitly requested.
+- SEO uses native Next.js metadata, localized route metadata from `src/lib/seo.ts`, `src/app/sitemap.ts`, `src/app/robots.ts`, and homepage JSON-LD. `/si` and `/en` own localized canonical, Open Graph, Twitter, and hreflang values; the root layout reads the locale header from `src/proxy.ts` for route-correct `html lang`. The OG/social image is `public/og/luciand-og.png`; favicon files are already integrated and should not be changed unless explicitly requested.
+- Locale entry routing uses `src/proxy.ts`: root `/` redirects Slovenian visitors to `/si` and other visitors to `/en` from deployment geo headers, then a short IP geolocation fallback, then `Accept-Language` as a final local fallback. Until English copy is ready, `/si` and `/en` both render the shared current homepage from `src/app/home-page.tsx`.
 
 ## Maintenance
 
